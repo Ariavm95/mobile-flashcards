@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
-import { Card, CardItem, Body, Text } from 'native-base';
+import { FlatList, StyleSheet} from 'react-native';
+import { Card, CardItem, Text ,View, Right, Icon} from 'native-base';
 import { getDecks } from '../db';
 
 export default class DeckListView extends Component {
@@ -20,26 +20,31 @@ export default class DeckListView extends Component {
 
     render() {
         return (
-            <View style={{
-                width:200,
-                height:100
-            }}>
-                <FlatList
-                    data={this.state.decks}
-                    keyExtractor={(item, index) => index}
-                    renderItem={({item}) => (
-                        <Card >
-                            <CardItem>
-                                <Body>
-                                    <Text>
-                                        {item.title}
-                                    </Text>
-                                </Body>
-                            </CardItem>
-                        </Card>
-                    )}
-                />
-            </View>
+            <FlatList
+                style={{paddingTop:50}}
+                data={this.state.decks}
+                keyExtractor={(item, index) => index}
+                renderItem={({item}) => (
+                    <Card style={{
+                        marginLeft:50,
+                        marginRight:50,
+                        height:60
+                    }}>
+                        <CardItem style={{
+                            flex:1,
+                            flexDirection:"row",
+                            justifyContent:"space-between",
+                            alignItems:"center"}}>
+                            <Text>
+                                {item.title}
+                            </Text>
+                            <Right style={{paddingRight:5}}>
+                                <Icon name="arrow-forward" />
+                            </Right>
+                        </CardItem>
+                    </Card>
+                )}
+            />
         );
     }
 }
