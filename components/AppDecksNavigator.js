@@ -2,31 +2,21 @@ import React, {Component} from 'react';
 import { View, Text } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import DeckListView from './DeckListView';
+import DeckView from './DeckView';
 
 export default class AppDecksNavigator extends Component {
     render() {
-        const deckListView = ({navigation}) => (
-            <DeckListView navigation={navigation}/>
-        );
-
-        const deckView = ({navigation}) => (
-            <View>
-                <Text>Deck View - {JSON.stringify(navigation.state.params.item)}</Text>
-            </View>
-        );
-
         const ListNavigator = StackNavigator({
             deckListView: {
-                screen: deckListView,
+                screen: DeckListView,
                 navigationOptions: {
                     header: null
                 }
             },
             deckView: {
-                screen: deckView,
+                screen: DeckView,
                 navigationOptions: {
-                    headerTintColor: 'black',
-                    title: "Deck"
+                    headerTintColor: 'black'
                 }
             }
         });

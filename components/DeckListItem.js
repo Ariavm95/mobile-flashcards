@@ -4,10 +4,10 @@ import { Card, CardItem, Text, Right, Icon} from 'native-base';
 
 export default class DeckListItem extends Component {
     render() {
-        const item = this.props.item;
+        const { item, navigation } = this.props;
         return (
             <TouchableOpacity
-                onPress={() => this.props.navigation.navigate('deckView', {item})}>
+                onPress={() => navigation.navigate('deckView', {item})}>
                 <Card style={{
                     marginLeft:30,
                     marginRight:50,
