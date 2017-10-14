@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import { View, Text } from 'react-native';
-import DeckListView from './DeckListView';
+import AppDecksNavigator from './AppDecksNavigator';
 import { TabNavigator } from 'react-navigation';
 import { FontAwesome} from '@expo/vector-icons';
 
-export default class AppTabView extends Component {
+export default class AppRootNavigator extends Component {
     render() {
-        const deckListView = () => (<DeckListView />);
+        const deckListView = () => (<AppDecksNavigator />);
         const newDeck = () => (
             <View>
                 <Text>New Deck</Text>

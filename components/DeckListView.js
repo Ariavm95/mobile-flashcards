@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { FlatList, TouchableOpacity, View } from 'react-native';
 import { Card, CardItem, Text, Right, Icon} from 'native-base';
 import { getDecks } from '../db';
-import { StackNavigator } from 'react-navigation';
 
 export default class DeckListView extends Component {
     constructor(props) {
@@ -20,14 +19,14 @@ export default class DeckListView extends Component {
     }
 
     render() {
-        const deckListView = ({navigation}) => (
+        return (
             <FlatList
-            style={{ paddingTop: 50 }}
+                style={{ paddingTop: 50 }}
                 data={this.state.decks}
                 keyExtractor={(item, index) => index}
                 renderItem={({item}) => (
                     <TouchableOpacity
-                        onPress={() => navigation.navigate('deckView', {item})}>
+                        onPress={() => this.props.navigation.navigate('deckView', {item})}>
                         <Card style={{
                             marginLeft:50,
                             marginRight:50,
@@ -50,34 +49,5 @@ export default class DeckListView extends Component {
                 )}
             />
         );
-
-        const deckView = ({navigation}) => (
-            <View>
-                <Text>Deck View - {JSON.stringify(navigation.state.params.item)}</Text>
-            </View>
-        );
-
-        const ListNavigator = StackNavigator({
-            deckListView: {
-                screen: deckListView,
-                navigationOptions: {
-                    header: null
-                }
-            },
-            deckView: {
-                screen: deckView,
-                navigationOptions: {
-                    headerTintColor: 'black',
-                    title: "Deck"
-                }
-            }
-        });
-
-        return (
-            <ListNavigator />
-        );
     }
 }
-
-const styles = StyleSheet.create({
-});
