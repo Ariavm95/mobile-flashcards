@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import { FlatList } from 'react-native';
 import { getDecks } from '../db';
 import DeckListItem from './DeckListItem';
+import { connect } from 'react-redux';
 
-export default class DeckListView extends Component {
+class DeckListView extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -34,3 +35,5 @@ export default class DeckListView extends Component {
         );
     }
 }
+
+export default connect()(DeckListView);

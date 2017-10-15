@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native';
 
 const STORAGE_KEY = "FLASHBARDS_KEY";
-const initData = {
+export const initData = {
     React: {
         title: 'React',
         questions: [{
