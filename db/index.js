@@ -32,10 +32,6 @@ export const getDecks = () => {
             } else {
                 return JSON.parse(results);
             }
-        }).then(data => {
-            return Object.keys(data).reduce((decks, id) => {
-                return decks.concat(data[id]);
-            }, []);
         });
 }
 

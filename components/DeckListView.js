@@ -1,24 +1,12 @@
 import React, {Component} from 'react';
 import { FlatList } from 'react-native';
-import { getDecks } from '../db';
+import { fetchDecks } from '../actions';
 import DeckListItem from './DeckListItem';
 import { connect } from 'react-redux';
 
 class DeckListView extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            decks: []
-        }
-    }
-
     componentDidMount() {
-        getDecks().then( decks => {
-            console.log(JSON.stringify(decks))
-            this.setState({
-                decks
-            })
-        });
+        this.props.getDecks();
     }
 
     render() {
@@ -26,7 +14,7 @@ class DeckListView extends Component {
         return (
             <FlatList
                 style={{ paddingTop: 50 }}
-                data={this.state.decks}
+                data={this.props.decks}
                 keyExtractor={(item, index) => index}
                 renderItem={({item}) => (
                     <DeckListItem navigation={navigation} item={item}/>
@@ -36,4 +24,18 @@ class DeckListView extends Component {
     }
 }
 
-export default connect()(DeckListView);
+function mapStateToProps(data) {
+    return {
+        decks: Object.keys(data).reduce((decks, id) => {
+            return decks.concat(data[id]);
+        }, [])
+    }
+}
+
+function mapDispatchToProps (dispatch) {
+    return {
+        getDecks: () => dispatch(fetchDecks())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeckListView);

@@ -1,8 +1,13 @@
-import { ADD_DECK } from '../actions';
+import {
+    ADD_DECK,
+    GET_DECKS
+} from '../actions';
 import { initData } from '../db';
 
 function decks(state = initData, action) {
     switch (action.type) {
+        case GET_DECKS:
+            return action.decks;
         case ADD_DECK:
             const { title } = action;
             return {
@@ -11,7 +16,7 @@ function decks(state = initData, action) {
                     title,
                     questions: []
                 }
-            }
+            };
         default:
             return state
     }

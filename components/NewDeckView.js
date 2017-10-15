@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import { View,  KeyboardAvoidingView, Keyboard } from 'react-native';
 import {Input, Item, Text, Button } from 'native-base';
-import { saveDeckTitle } from '../db';
+import { addDeck } from '../actions';
+import { connect } from 'react-redux';
 
-export default class NewDeckView extends Component {
+class NewDeckView extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -13,7 +14,9 @@ export default class NewDeckView extends Component {
     }
 
     setTitle(title) {
-        const buttonDisable = !!!title;
+        const noTitle = !!!title;
+        const hasExistingTitle = this.props.deckList.includes(title);
+        const buttonDisable = noTitle || hasExistingTitle;
         this.setState({
             input: title,
             buttonDisable
@@ -23,7 +26,7 @@ export default class NewDeckView extends Component {
     createDeck() {
         const { navigation } = this.props;
         Keyboard.dismiss();
-        saveDeckTitle(this.state.input).then(() => {
+        this.props.addDeck(this.state.input).then(() => {
             this.setState({
                 input: "",
                 buttonDisable: true
@@ -80,3 +83,16 @@ export default class NewDeckView extends Component {
         );
     }
 }
+function mapStateToProps(data) {
+    return {
+        deckList: Object.keys(data)
+    }
+}
+
+function mapDispatchToProps (dispatch) {
+    return {
+        addDeck: (title) => dispatch(addDeck(title))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewDeckView);
