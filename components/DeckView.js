@@ -11,7 +11,8 @@ export default class DeckView extends Component {
     }
 
     render() {
-        const { title, questions } = this.props.navigation.state.params.item;
+        const { navigation } = this.props;
+        const { title, questions } = navigation.state.params.item;
         const cardCount = questions.length;
         const cardCountText = `${cardCount} card${cardCount>1?"s":""}`
         return (
@@ -37,10 +38,14 @@ export default class DeckView extends Component {
                     flexDirection: "row",
                     justifyContent: "center"
                 }}>
-                    <Button bordered style={{ marginRight: 10 }}>
+                    <Button
+                        onPress={() => navigation.navigate("newCardView")}
+                        bordered style={{ marginRight: 10 }}>
                         <Text>Add Card</Text>
                     </Button>
-                    <Button bordered>
+                    <Button
+                        onPress={() => navigation.navigate("quizView", {questions})}
+                        bordered>
                         <Text>Start Quiz</Text>
                     </Button>
                 </View>
