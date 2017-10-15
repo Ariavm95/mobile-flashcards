@@ -20,7 +20,7 @@ export default class AppTabNavigator extends Component {
                 }
             },
             NewDeck: {
-                screen: () => (<NewDeckView />),
+                screen: NewDeckView,
                 navigationOptions: {
                     tabBarLabel: "New Deck",
                     tabBarIcon: ({ tintColor }) => <FontAwesome name='plus' size={30} color={tintColor} />

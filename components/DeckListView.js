@@ -12,10 +12,12 @@ export default class DeckListView extends Component {
     }
 
     componentDidMount() {
-        const decks = getDecks();
-        this.setState({
-            decks
-        })
+        getDecks().then( decks => {
+            console.log(JSON.stringify(decks))
+            this.setState({
+                decks
+            })
+        });
     }
 
     render() {

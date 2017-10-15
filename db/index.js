@@ -1,4 +1,7 @@
-const data = {
+import { AsyncStorage } from 'react-native';
+
+const STORAGE_KEY = "FLASHBARDS_KEY";
+const initData = {
     React: {
         title: 'React',
         questions: [{
@@ -21,20 +24,36 @@ const data = {
 }
 
 export const getDecks = () => {
-    return Object.keys(data).reduce((decks, id) => {
-        return decks.concat(data[id]);
-    }, []);
+    return AsyncStorage.getItem(STORAGE_KEY)
+        .then( results => {
+            if(results == null) {
+                AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(initData));
+                return initData;
+            } else {
+                return JSON.parse(results);
+            }
+        }).then(data => {
+            return Object.keys(data).reduce((decks, id) => {
+                return decks.concat(data[id]);
+            }, []);
+        });
 }
 
 export const getDeck = (id) => {
-    return data[id]
+    return AsyncStorage.getItem(STORAGE_KEY)
+        .then(results => {
+            const data = JSON.parse(results);
+            return data[id];
+        })
 }
 
 export const saveDeckTitle = (title) => {
-    data[title] = {
-        title,
-        questions: []
-    }
+    return AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify({
+        [title]: {
+            title,
+            questions: []
+        }
+    }))
 }
 
 export const addCardToDeck = (title, card) => {
