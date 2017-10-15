@@ -15,6 +15,20 @@ export default class DeckView extends Component {
         const { title, questions } = navigation.state.params.item;
         const cardCount = questions.length;
         const cardCountText = `${cardCount} card${cardCount>1?"s":""}`
+        const disabledQuizButton = (
+            <Button disabled bordered>
+                <Text>Start Quiz</Text>
+            </Button>
+        );
+        const quizButton = cardCount === 0
+            ? disabledQuizButton
+            : (
+                <Button
+                    onPress={() => navigation.navigate("quizView", {title})}
+                    bordered>
+                    <Text>Start Quiz</Text>
+                </Button>
+            )
         return (
             <View style={{
                 flex:1,
@@ -43,11 +57,7 @@ export default class DeckView extends Component {
                         bordered style={{ marginRight: 10 }}>
                         <Text>Add Card</Text>
                     </Button>
-                    <Button
-                        onPress={() => navigation.navigate("quizView", {questions})}
-                        bordered>
-                        <Text>Start Quiz</Text>
-                    </Button>
+                    {quizButton}
                 </View>
             </View>
         );

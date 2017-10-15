@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { View,  KeyboardAvoidingView, Keyboard } from 'react-native';
+import { View,  KeyboardAvoidingView, Keyboard, TouchableWithoutFeedback } from 'react-native';
 import {Input, Item, Text, Button } from 'native-base';
 import { addDeck } from '../actions';
 import { connect } from 'react-redux';
@@ -36,53 +36,59 @@ class NewDeckView extends Component {
     }
 
     render() {
-        const button = this.state.buttonDisable ?
-            (
-                <Button bordered disabled>
-                    <Text> Submit </Text>
-                </Button>
-            ) : (
-                <Button
-                    bordered success
-                    onPress={ this.createDeck.bind(this) }
-                    >
-                    <Text> Submit </Text>
-                </Button>
-            );
+        const disabledButton = (
+            <Button bordered disabled>
+                <Text> Submit </Text>
+            </Button>
+        );
+        const submitButton = (
+            <Button
+                bordered success
+                onPress={ this.createDeck.bind(this) }
+                >
+                <Text> Submit </Text>
+            </Button>
+        );
+        const button = this.state.buttonDisable
+            ? disabledButton
+            : submitButton;
 
         return (
-            <KeyboardAvoidingView behavior="padding" style={{
-                flex:1,
-                justifyContent:"center",
-                alignItems:"center"
-            }}>
-                <View>
-                    <Text style={{
-                        fontSize:25,
-                        fontWeight:"bold"
-                    }}>
-                        What is the title of your new Deck?
-                    </Text>
-                </View>
-                <View>
-                    <Item regular style={{
-                        marginTop:15,
-                        marginBottom:10,
-                        width: 300
-                    }}>
-                        <Input
-                            placeholder='Title'
-                            onChangeText={ this.setTitle.bind(this) }
-                            value={this.state.input} />
-                    </Item>
-                </View>
-                <View>
-                    {button}
-                </View>
-            </KeyboardAvoidingView>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <KeyboardAvoidingView behavior="padding" style={{
+                    flex:1,
+                    justifyContent:"center",
+                    alignItems:"center"
+                }}>
+                    <View>
+                        <Text style={{
+                            fontSize:25,
+                            fontWeight:"bold"
+                        }}>
+                            What is the title of your new Deck?
+                        </Text>
+                    </View>
+                    <View>
+                        <Item regular style={{
+                            marginTop:15,
+                            marginBottom:10,
+                            width: 300
+                        }}>
+                            <Input
+                                placeholder='Title'
+                                onChangeText={ this.setTitle.bind(this) }
+                                value={this.state.input} />
+                        </Item>
+                    </View>
+                    <View>
+                        {button}
+                    </View>
+                </KeyboardAvoidingView>
+            </TouchableWithoutFeedback>
         );
     }
 }
+
 function mapStateToProps(data) {
     return {
         deckList: Object.keys(data)
