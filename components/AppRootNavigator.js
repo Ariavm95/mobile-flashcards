@@ -1,12 +1,15 @@
 import React, {Component} from 'react';
 import { View, Text } from 'react-native';
-import AppDecksNavigator from './AppDecksNavigator';
+import DeckListView from './DeckListView';
 import { TabNavigator } from 'react-navigation';
 import { FontAwesome} from '@expo/vector-icons';
 
 export default class AppRootNavigator extends Component {
     render() {
-        const deckListView = () => (<AppDecksNavigator />);
+        const { navigation } = this.props;
+        const deckList = () =>(
+            <DeckListView navigation={navigation}/>
+        )
         const newDeck = () => (
             <View>
                 <Text>New Deck</Text>
@@ -14,7 +17,7 @@ export default class AppRootNavigator extends Component {
         );
         const Tabs = TabNavigator({
             DeckList: {
-                screen: deckListView,
+                screen: deckList,
                 navigationOptions: {
                     tabBarLabel: "Deck List",
                     tabBarIcon: ({ tintColor }) => <FontAwesome name='list' size={30} color={tintColor} />

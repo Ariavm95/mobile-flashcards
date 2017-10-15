@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import { View, Text } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import DeckListView from './DeckListView';
+import AppRootNavigator from './AppRootNavigator';
 import DeckView from './DeckView';
 
 export default class AppDecksNavigator extends Component {
     render() {
         const ListNavigator = StackNavigator({
             deckListView: {
-                screen: DeckListView,
+                screen: AppRootNavigator,
                 navigationOptions: {
                     header: null
                 }
