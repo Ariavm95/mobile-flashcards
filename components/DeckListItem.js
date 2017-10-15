@@ -5,6 +5,8 @@ import { Card, CardItem, Text, Right, Icon} from 'native-base';
 export default class DeckListItem extends Component {
     render() {
         const { item, navigation } = this.props;
+        const cardCount = item.questions.length;
+        const cardCountText = `${cardCount} card${cardCount>1?"s":""}`
         return (
             <TouchableOpacity
                 onPress={() => navigation.navigate('deckView', {item})}>
@@ -27,7 +29,7 @@ export default class DeckListItem extends Component {
                                 {item.title}
                             </Text>
                             <Text>
-                                {item.questions.length} cards
+                                {cardCountText}
                             </Text>
                         </View>
                         <Right style={{paddingRight:5}}>
