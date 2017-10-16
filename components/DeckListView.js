@@ -13,7 +13,7 @@ class DeckListView extends Component {
         const navigation = this.props.navigation;
         return (
             <FlatList
-                style={{ paddingTop: 50 }}
+                style={{ paddingTop: 20 }}
                 data={this.props.decks}
                 keyExtractor={(item, index) => index}
                 renderItem={({item}) => (

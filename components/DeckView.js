@@ -11,7 +11,7 @@ class DeckView extends Component {
             title
         }
     }
-    
+
     //force refresh when adding a new card and navigate back
     refresh() {
         this.setState({});
@@ -60,7 +60,10 @@ class DeckView extends Component {
                     justifyContent: "center"
                 }}>
                     <Button
-                        onPress={() => navigation.navigate("newCardView", {title, refresh: this.refresh.bind(this)})}
+                        onPress={() => navigation.navigate("newCardView", {
+                            title,
+                            refresh: this.refresh.bind(this)
+                        })}
                         bordered style={{ marginRight: 10 }}>
                         <Text>Add Card</Text>
                     </Button>
