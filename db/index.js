@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native';
 
-const STORAGE_KEY = "FLASHBARDS_KEY";
+const STORAGE_KEY = "FLASHBARDS_KEY_2";
 export const initData = {
     React: {
         title: 'React',
@@ -53,9 +53,21 @@ export const saveDeckTitle = (title) => {
 }
 
 export const addCardToDeck = (title, card) => {
-    const {question, answer} = card;
-    data[title].questions.push({
-        question,
-        answer
-    })
+    return AsyncStorage.getItem(STORAGE_KEY)
+        .then(results => {
+            return JSON.parse(results)[title]
+        })
+        .then(data => {
+            const {question, answer} = card;
+            const questions = data.questions.concat({
+                question,
+                answer
+            });
+            AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify({
+                [title]: {
+                    title,
+                    questions
+                }
+            }));
+        })
 }

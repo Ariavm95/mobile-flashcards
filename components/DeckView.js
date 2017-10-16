@@ -1,18 +1,25 @@
 import React, {Component} from 'react';
 import { View } from 'react-native';
 import { Button, Text } from 'native-base';
+import { connect } from 'react-redux';
+import { FontAwesome} from '@expo/vector-icons';
 
-export default class DeckView extends Component {
+class DeckView extends Component {
     static navigationOptions = ({ navigation }) => {
-        const { title } = navigation.state.params.item;
+        const { title } = navigation.state.params;
         return {
             title
         }
     }
+    
+    //force refresh when adding a new card and navigate back
+    refresh() {
+        this.setState({});
+    }
 
     render() {
-        const { navigation } = this.props;
-        const { title, questions } = navigation.state.params.item;
+        const { navigation, questions } = this.props;
+        const { title } = navigation.state.params;
         const cardCount = questions.length;
         const cardCountText = `${cardCount} card${cardCount>1?"s":""}`
         const disabledQuizButton = (
@@ -53,7 +60,7 @@ export default class DeckView extends Component {
                     justifyContent: "center"
                 }}>
                     <Button
-                        onPress={() => navigation.navigate("newCardView")}
+                        onPress={() => navigation.navigate("newCardView", {title, refresh: this.refresh.bind(this)})}
                         bordered style={{ marginRight: 10 }}>
                         <Text>Add Card</Text>
                     </Button>
@@ -63,3 +70,12 @@ export default class DeckView extends Component {
         );
     }
 }
+
+function mapStateToProps(data, { navigation }) {
+    const { title } = navigation.state.params;
+    return {
+        questions: data[title].questions
+    }
+}
+
+export default connect(mapStateToProps)(DeckView);

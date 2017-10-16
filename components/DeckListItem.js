@@ -9,7 +9,7 @@ export default class DeckListItem extends Component {
         const cardCountText = `${cardCount} card${cardCount>1?"s":""}`
         return (
             <TouchableOpacity
-                onPress={() => navigation.navigate('deckView', {item})}>
+                onPress={() => navigation.navigate('deckView', {title: item.title})}>
                 <Card style={{
                     marginLeft:30,
                     marginRight:50,

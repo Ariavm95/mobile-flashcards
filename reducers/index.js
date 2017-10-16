@@ -1,6 +1,7 @@
 import {
     ADD_DECK,
-    GET_DECKS
+    GET_DECKS,
+    ADD_CARD
 } from '../actions';
 import { initData } from '../db';
 
@@ -17,6 +18,10 @@ function decks(state = initData, action) {
                     questions: []
                 }
             };
+        case ADD_CARD:
+            const stateCopy = {...state};
+            stateCopy[action.title].questions.push(action.card);
+            return stateCopy;
         default:
             return state
     }
