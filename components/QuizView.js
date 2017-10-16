@@ -63,6 +63,8 @@ class QuizView extends Component {
     }
 
     renderResult() {
+        const { right, wrong } = this.state;
+        const score = ((right / (right + wrong)) * 100).toFixed(0);
         return (
             <View style={{
                 flex: 1,
@@ -76,10 +78,13 @@ class QuizView extends Component {
                     All done!
                 </Text>
                 <Text>
-                    Right: {this.state.right}
+                    Your Score is {score}
                 </Text>
                 <Text>
-                    Wrong: {this.state.wrong}
+                    Right: {right}
+                </Text>
+                <Text>
+                    Wrong: {wrong}
                 </Text>
             </View>
         );
@@ -196,8 +201,9 @@ class QuizView extends Component {
 }
 
 function mapStateToProps(data, {navigation}) {
-    const { title } = navigation.state.params;
+    const { title, restartQuiz } = navigation.state.params;
     return {
+        restartQuiz,
         questions: data[title].questions
     }
 }

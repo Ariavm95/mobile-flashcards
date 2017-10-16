@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { Button, Text } from 'native-base';
 import { connect } from 'react-redux';
 import { FontAwesome} from '@expo/vector-icons';
+import { clearLocalNotification, setLocalNotification } from '../db';
 
 class DeckView extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -31,7 +32,10 @@ class DeckView extends Component {
             ? disabledQuizButton
             : (
                 <Button
-                    onPress={() => navigation.navigate("quizView", {title})}
+                    onPress={() => {
+                        navigation.navigate("quizView", { title });
+                        clearLocalNotification().then(setLocalNotification);
+                    }}
                     bordered>
                     <Text>Start Quiz</Text>
                 </Button>
