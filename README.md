@@ -14,16 +14,19 @@ Tested on iPhone 6 (Device) and iPhone 7 (Emulator)
 ## Screenshots
 ### Deck List
 You can navigate your decks as well as add new deck to the list
+
 ![deckList][deckList]
 ![newDeck][newDeck]
 
 ### Deck View
 In each deck, you can add cards to the deck and take quizzes
+
 ![deckView][deckView]
 ![newCard][newCard]
 
 ### Quiz View
 Once quiz is launched, you can flip the card to view the answer, swipe left to mark incorrect while swipe right for correct answers. At the end, you can see the final score.
+
 ![quiz1][quiz1]
 ![quiz2][quiz2]
 
