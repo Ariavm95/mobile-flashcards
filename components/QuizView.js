@@ -73,9 +73,6 @@ class QuizView extends PureComponent {
                     fontSize: 25,
                     fontWeight: 'bold'
                 }}>
-                    All done!
-                </Text>
-                <Text>
                     Your Score is {score}
                 </Text>
                 <Text>
