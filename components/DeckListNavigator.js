@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import { View, Text } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import AppTabNavigator from './AppTabNavigator';
@@ -6,7 +6,7 @@ import QuizView from './QuizView';
 import DeckView from './DeckView';
 import NewCardView from './NewCardView';
 
-export default class DeckListNavigator extends Component {
+export default class DeckListNavigator extends PureComponent {
     render() {
         const ListNavigator = StackNavigator({
             deckListView: {

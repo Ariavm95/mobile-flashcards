@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {
     View,
     KeyboardAvoidingView,
@@ -13,13 +13,11 @@ import {
 import { addDeck } from '../actions';
 import { connect } from 'react-redux';
 
-class NewDeckView extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            input: "",
-            buttonDisable: true
-        }
+class NewDeckView extends PureComponent {
+    
+    state = {
+        input: "",
+        buttonDisable: true
     }
 
     setTitle(title) {

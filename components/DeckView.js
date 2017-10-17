@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import { View } from 'react-native';
 import { Button, Text } from 'native-base';
 import { connect } from 'react-redux';
 import { FontAwesome} from '@expo/vector-icons';
 import { clearLocalNotification, setLocalNotification } from '../db';
 
-class DeckView extends Component {
+class DeckView extends PureComponent {
     static navigationOptions = ({ navigation }) => {
         const { title } = navigation.state.params;
         return {

@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { Card, CardItem, Text, Right, Icon} from 'native-base';
 
-export default class DeckListItem extends Component {
+export default class DeckListItem extends PureComponent {
     render() {
         const { item, navigation } = this.props;
         const cardCount = item.questions.length;

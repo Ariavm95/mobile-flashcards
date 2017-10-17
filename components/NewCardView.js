@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {
     View,
     KeyboardAvoidingView,
@@ -13,14 +13,12 @@ import {
 import { addCard } from '../actions';
 import { connect } from 'react-redux';
 
-class NewCardView extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            questionText: "",
-            answerText: "",
-            buttonDisable: true
-        }
+class NewCardView extends PureComponent {
+
+    state = {
+        questionText: "",
+        answerText: "",
+        buttonDisable: true
     }
 
     setQuestion(questionText) {

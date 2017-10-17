@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
 import {
@@ -11,16 +11,14 @@ import {
     Icon
 } from 'native-base';
 
-class QuizView extends Component {
-    constructor(props) {
-        super(props);
-        this.state= {
-            counter:1,
-            right:0,
-            wrong:0,
-            showQuestion: true,
-            complete: false
-        };
+class QuizView extends PureComponent {
+
+    state= {
+        counter:1,
+        right:0,
+        wrong:0,
+        showQuestion: true,
+        complete: false
     }
 
     handleWrong() {

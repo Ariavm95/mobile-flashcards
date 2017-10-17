@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import { View, StatusBar } from 'react-native';
 import { Constants } from 'expo';
 
-export default class AppStatusBar extends Component {
+export default class AppStatusBar extends PureComponent {
     render() {
         return (
             <View style={{ backgroundColor:"black", height: Constants.statusBarHeight }}>

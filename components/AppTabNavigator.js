@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import { View, Text } from 'react-native';
 import DeckListView from './DeckListView';
 import NewDeckView from './NewDeckView';
 import { TabNavigator } from 'react-navigation';
 import { FontAwesome} from '@expo/vector-icons';
 
-export default class AppTabNavigator extends Component {
+export default class AppTabNavigator extends PureComponent {
     render() {
         const { navigation } = this.props;
         const deckList = () =>(

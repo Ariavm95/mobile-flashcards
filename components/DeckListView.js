@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import { FlatList } from 'react-native';
 import { fetchDecks } from '../actions';
 import DeckListItem from './DeckListItem';
 import { connect } from 'react-redux';
 
-class DeckListView extends Component {
+class DeckListView extends PureComponent {
     componentDidMount() {
         this.props.getDecks();
     }
